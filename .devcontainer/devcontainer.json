@@ -1,5 +1,5 @@
 {
-  "name": "AEGIS Sentinel Environment",
+  "name": "AEGIS Sentinel Server Environment",
   "image": "mcr.microsoft.com/devcontainers/python:3.10",
   "customizations": {
     "vscode": {
@@ -8,10 +8,10 @@
       ]
     }
   },
-  "postCreateCommand": "pip install -r requirements.txt",
+  "postCreateCommand": "apt-get update && apt-get install -y ffmpeg libsm6 libxext6 && pip install -r requirements.txt",
   "portsAttributes": {
     "8501": {
-      "label": "AEGIS Streamlit Dashboard",
+      "label": "AEGIS Server Interface",
       "onAutoForward": "openBrowser"
     }
   }
