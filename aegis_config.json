@@ -1,15 +1,24 @@
 {
   "system": {
     "fps_target": 1,
-    "input_resolution": [640, 640],
-    "hysteresis_threshold_sec": 3
+    "hysteresis_threshold_sec": 3,
+    "max_matrix_side_px": 1280
   },
-  "classes": {
-    "macro": "person",
-    "micro": ["capacete", "oculos_protecao", "luvas"]
-  },
-  "crypto": {
-    "hash_algorithm": "SHA-256",
-    "aes_key_size_bits": 256
-  }
+  "authorized_devices": [
+    {
+      "device_id": "CAM-CORP-001",
+      "device_name": "BodyCam Turno A",
+      "hardware_token": "TOK-883921-A"
+    },
+    {
+      "device_id": "MOBILE-ANDROID-02",
+      "device_name": "Celular Vistoria Obra",
+      "hardware_token": "TOK-552109-B"
+    },
+    {
+      "device_id": "USB-DESK-CAM",
+      "device_name": "Webcam USB Inspeção Local",
+      "hardware_token": "TOK-110293-C"
+    }
+  ]
 }
