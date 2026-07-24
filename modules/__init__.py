@@ -1,1 +1,1 @@
-
+# Módulo AEGIS Sentinel Core
