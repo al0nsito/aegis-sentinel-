@@ -15,7 +15,7 @@ class RAMVault:
             "Detalhes": details
         })
 
-    def get_dataframe((self) -> pd.DataFrame:
+    def get_dataframe(self) -> pd.DataFrame:
         if not self.events:
             return pd.DataFrame(columns=["Horário", "Dispositivo", "Tipo", "Hash SHA-256 (Evidência Volátil)", "Detalhes"])
         return pd.DataFrame(self.events)
