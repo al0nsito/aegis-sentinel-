@@ -1,1 +1,18 @@
-
+{
+  "name": "AEGIS Sentinel Environment",
+  "image": "mcr.microsoft.com/devcontainers/python:3.10",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python"
+      ]
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt",
+  "portsAttributes": {
+    "8501": {
+      "label": "AEGIS Streamlit Dashboard",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}
