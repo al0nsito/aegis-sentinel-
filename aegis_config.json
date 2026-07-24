@@ -1,1 +1,15 @@
-
+{
+  "system": {
+    "fps_target": 1,
+    "input_resolution": [640, 640],
+    "hysteresis_threshold_sec": 3
+  },
+  "classes": {
+    "macro": "person",
+    "micro": ["capacete", "oculos_protecao", "luvas"]
+  },
+  "crypto": {
+    "hash_algorithm": "SHA-256",
+    "aes_key_size_bits": 256
+  }
+}
