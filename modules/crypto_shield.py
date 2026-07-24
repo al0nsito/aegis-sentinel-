@@ -1,23 +1,23 @@
 # modules/crypto_shield.py
 import json
 import numpy as np
+import builtins
 
 class NumpyEncoder(json.JSONEncoder):
     """
-    Classe customizada para serializar objetos do NumPy (ndarrays, int64, float32, etc.)
-    diretamente para formato JSON sem estourar TypeError.
+    Encoder customizado para converter objetos do NumPy em tipos JSON serializáveis.
     """
     def default(self, obj):
-        if isinstance(obj, np.ndarray):
+        if builtins.isinstance(obj, np.ndarray):
             return {
-                "shape": list(obj.shape),
-                "dtype": str(obj.dtype),
-                "mean_val": float(np.mean(obj))
+                "shape": builtins.list(obj.shape),
+                "dtype": builtins.str(obj.dtype),
+                "mean_val": builtins.float(np.mean(obj))
             }
-        if isinstance(obj, np.integer):
-            return int(obj)
-        if isinstance(obj, np.floating):
-            return float(obj)
+        if builtins.isinstance(obj, np.integer):
+            return builtins.int(obj)
+        if builtins.isinstance(obj, np.floating):
+            return builtins.float(obj)
         return super(NumpyEncoder, self).default(obj)
 
 
@@ -27,24 +27,22 @@ class CryptoShield:
 
     def generate_proof(self, dev_info, ai_res, matrix):
         """
-        Gera a prova de integridade/auditoria tratando matrizes de vídeo/imagem
-        e dicionários de telemetria sem erro de serialização JSON.
+        Gera a prova em bytes garantindo que matrizes numpy não quebrem o json.dumps.
         """
-        # Garante a extração de bytes de imagem caso a matriz seja fornecida
-        if isinstance(matrix, np.ndarray):
-            img_bytes = matrix.tobytes()[:1024]  # Amostra de bytes da imagem
+        if builtins.isinstance(matrix, np.ndarray):
+            img_bytes = matrix.tobytes()[:1024]
         else:
             img_bytes = b""
 
         payload = {
             "dev_info": dev_info,
             "ai_res": ai_res,
-            "matrix_summary": matrix if not isinstance(matrix, np.ndarray) else {
-                "shape": list(matrix.shape),
-                "dtype": str(matrix.dtype)
+            "matrix_summary": matrix if not builtins.isinstance(matrix, np.ndarray) else {
+                "shape": builtins.list(matrix.shape),
+                "dtype": builtins.str(matrix.dtype)
             }
         }
 
-        # Serializa utilizando o encoder seguro do NumPy
+        # Serializa com tratamento seguro
         payload_bytes = json.dumps(payload, cls=NumpyEncoder, ensure_ascii=False).encode('utf-8') + img_bytes
         return payload_bytes
